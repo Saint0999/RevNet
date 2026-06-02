@@ -28,6 +28,8 @@ export function AvatarWithBadge() {
 
 function Sidebar({isOpen, setIsOpen}: SidebarProps){
 
+    setIsOpen(false);
+
     return(
         <>
 
