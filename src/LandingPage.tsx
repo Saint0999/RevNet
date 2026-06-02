@@ -63,12 +63,6 @@ export default function LandingPage() {
           <button className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
             Login
           </button>
-          <button 
-            onClick={() => navigate('/dashboard')}
-            className="text-xs font-bold bg-[#10B981] hover:bg-[#059669] text-white px-5 py-3 rounded-full transition-colors tracking-wider uppercase flex items-center gap-2 shadow-[0_4px_12px_rgba(16,185,129,0.15)]"
-          >
-            <span>→</span> Get Started
-          </button>
         </div>
       </nav>
 

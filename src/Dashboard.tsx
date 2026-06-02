@@ -90,7 +90,7 @@ const chartData: Record<string, any[]> = {
 };
 
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [activeButton, setActiveButton] = useState('7 Days');
 
   const timeframes = ['7 Days', '30 Days', '90 Days', '12 Months'];
@@ -104,7 +104,7 @@ function App() {
       
       <main className="flex-1 overflow-y-auto">
         
-        <div className="max-w-6xl mx-auto pt-5 pr-5 pb-5 md:p-8">
+        <div className="max-w-6xl mx-auto pt-20 px-6 pb-8 md:p-10">
           
           <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-6">
             

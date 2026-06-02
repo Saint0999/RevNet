@@ -28,14 +28,11 @@ export function AvatarWithBadge() {
 
 function Sidebar({isOpen, setIsOpen}: SidebarProps){
 
-    setIsOpen(false);
-
     return(
         <>
-
             {isOpen && (
                 <div
-                    className="fixed inset-0 z-40 md:hidden"
+                    className="fixed inset-0 z-40 md:hidden bg-black/20 backdrop-blur-xs"
                     onClick={() => setIsOpen(false)}
                 />
             )}
@@ -44,7 +41,7 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                                 `bg-[#13171c] pt-4 pb-4 px-3 h-screen text-white z-50
                                 border-e border-gray-800
                                 fixed top-0 bottom-0 left-0 flex flex-col
-                                ${isOpen? 'translate-x-0 w-48': '-translate-x-full w-64 md:w-16'}
+                                ${isOpen ? 'translate-x-0 w-48' : '-translate-x-full w-0 md:w-16'}
                                 transition-all duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] overflow-hidden
                                 md:relative md:translate-x-0`
                             }>
@@ -105,7 +102,6 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                         <p className="opacity-75 pb-1 px-[10px]">Management</p>
                     </div>
 
-                    
                     {[
                         { icon: clientIcon, label: 'Clients', alt: 'Client Icon' },
                         { icon: subIcon, label: 'Subscription', alt: 'Subscription Icon' },
@@ -145,11 +141,9 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                 </div>
 
                 <button className="w-full flex items-center -mt-1 py-2 px-[10px] rounded-full opacity-80 hover:opacity-100 transition-all duration-300 ease-in-out bg-red-500/25">
-                    
                     <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 ml-0.5">
                         <img src={logoutIcon} alt="Logout" className="w-full h-full object-contain" />
                     </div>
-                    
                     <span 
                         className={`text-red-400 whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
                             isOpen ? "max-w-[100px] opacity-100 ml-6.5" : "max-w-0 opacity-0 ml-0 pointer-events-none"
@@ -157,12 +151,13 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                     >
                         Log Out
                     </span>
-                    
                 </button>
-                
             </aside>
 
-            <div onClick={() => setIsOpen(true)} className="flex md:hidden items-center justify-center w-10 h-10 m-4 rounded-full hover:bg-[#435166]/50 transition-colors duration-200 cursor-pointer">
+            <div 
+                onClick={() => setIsOpen(true)} 
+                className="absolute top-4 left-4 z-40 flex md:hidden items-center justify-center w-10 h-10 rounded-full bg-[#13171c] border border-gray-800/60 hover:bg-[#435166]/50 transition-colors duration-200 cursor-pointer"
+            >
                 <img src={MenuIcon} alt="Open Menu" className="w-6 h-6" />
             </div>
         </>
