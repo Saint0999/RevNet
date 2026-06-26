@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import RevLogo from "./assets/revlogo1.png"
 import Snippet from "./assets/revsnip.png"
 import AnalyticIcon from "./assets/analytics.png"
@@ -8,9 +8,43 @@ import SolanaIcon from "./assets/solana.png"
 import CircleIcon from "./assets/circle.png"
 import { useNavigate } from "react-router-dom";
 
+function useScrollReveal() {
+  const [isRevealed, setIsRevealed] = useState(false);
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        rootMargin: "-100px 0px",
+        threshold: 0.1,
+      }
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return [elementRef, isRevealed] as const;
+}
+
 export default function LandingPage() {
   const navigate = useNavigate();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const [heroRef, heroRevealed] = useScrollReveal();
+  const [platformRef, platformRevealed] = useScrollReveal();
+  const [featuresRef, featuresRevealed] = useScrollReveal();
+  const [aboutRef, aboutRevealed] = useScrollReveal();
+  const [faqRef, faqRevealed] = useScrollReveal();
 
   const toggleFaq = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -44,7 +78,7 @@ export default function LandingPage() {
       
       <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto animate-fade-in">
         <div className="flex items-center gap-2">
-          <img src={RevLogo} className="w-8 h-8 rounded-sm mt-1" alt="revnet logo"/>
+          <img src={RevLogo} className="w-6 h-6 rounded-sm mt-0.5" alt="revnet logo"/>
           <div>
             <span className="font-bold text-3xl text-white">rev</span>
             <span className="font-thin text-3xl text-zinc-400">net</span> 
@@ -65,9 +99,13 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
-        <div className="flex flex-col items-start lg:col-span-6 animate-fade-in-up [animation-delay:150ms] [animation-fill-mode:both]">
+      <main 
+        ref={heroRef}
+        className={`max-w-7xl mx-auto px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-all duration-1000 ease-out ${
+          heroRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
+      >
+        <div className="flex flex-col items-start lg:col-span-6">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-6">
             For modern digital businesses
           </p>
@@ -95,7 +133,7 @@ export default function LandingPage() {
             <p className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase select-none">
               Trusted By
             </p>
-            <div className="flex flex-wrap gap-8 items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
+            <div className="flex flex-wrap gap-8 items-center">
               <div className="flex flex-row gap-1.5 items-center">
                 <img src={SolanaIcon} className="w-5 h-5" alt="Solana"/>
                 <span className="text-lg font-bold tracking-tighter hover:text-white transition-colors cursor-default">Solana</span>
@@ -111,7 +149,7 @@ export default function LandingPage() {
 
         <div 
           onClick={() => navigate('/dashboard')} 
-          className="w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-700 cursor-pointer animate-fade-in-up [animation-delay:300ms] [animation-fill-mode:both]"
+          className="w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-700 cursor-pointer"
         >
           <div className="relative group rounded-xl border-4 border-zinc-800/80 bg-[#0B0B0C] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-zinc-700 hover:scale-[1.01] hover:shadow-[0_30px_70px_rgba(16,185,129,0.1)] aspect-[2934/1594]">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#10B981]/10 to-transparent opacity-30 blur-xl transition-all group-hover:opacity-40 pointer-events-none z-0" />
@@ -121,7 +159,12 @@ export default function LandingPage() {
 
       </main>
 
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <section 
+        ref={platformRef}
+        className={`max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start transition-all duration-1000 ease-out ${
+          platformRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         <div className="lg:col-span-5">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-4">The Platform</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white leading-[1.15]">
@@ -142,7 +185,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60">
+      <section 
+        ref={featuresRef}
+        className={`max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 transition-all duration-1000 ease-out ${
+          featuresRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         <div className="max-w-3xl mb-20">
           <p className="text-[#10B981] text-xs font-bold tracking-widest uppercase mb-4">Platform Capabilities</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white mb-6">Everything you need to run your business onchain.</h2>
@@ -178,7 +226,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60">
+      <section 
+        ref={aboutRef}
+        className={`max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 transition-all duration-1000 ease-out ${
+          aboutRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         <div className="max-w-4xl mb-20">
           <p className="text-[#10B981] text-xs font-bold tracking-widest uppercase mb-4">About revnet</p>
           <h2 className="text-3xl md:text-6xl font-medium tracking-tight text-white leading-[1.1] mb-8">
@@ -208,7 +261,12 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <section 
+        ref={faqRef}
+        className={`max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start transition-all duration-1000 ease-out ${
+          faqRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
+        }`}
+      >
         <div className="lg:col-span-5">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-4">FAQ</p>
           <h2 className="text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight">Frequently asked <br />questions</h2>
