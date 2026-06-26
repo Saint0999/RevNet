@@ -40,10 +40,9 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F0F10] text-[#E5E5E5] font-sans selection:bg-[#10B981]/30 selection:text-white">
+    <div className="min-h-screen bg-[#0F0F10] text-[#E5E5E5] font-sans selection:bg-[#10B981]/30 selection:text-white overflow-x-hidden">
       
-      {/* --- NAVIGATION BAR --- */}
-      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto">
+      <nav className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto animate-fade-in">
         <div className="flex items-center gap-2">
           <img src={RevLogo} className="w-8 h-8 rounded-sm mt-1" alt="revnet logo"/>
           <div>
@@ -53,24 +52,22 @@ export default function LandingPage() {
         </div>
         
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-zinc-400">
-          <a href="#" className="hover:text-white transition-colors">Features</a>
-          <a href="#" className="hover:text-white transition-colors">How It Works</a>
-          <a href="#" className="hover:text-white transition-colors">About</a>
-          <a href="#" className="hover:text-white transition-colors">FAQ</a>
+          <a href="#" className="hover:text-white transition-colors duration-200">Features</a>
+          <a href="#" className="hover:text-white transition-colors duration-200">How It Works</a>
+          <a href="#" className="hover:text-white transition-colors duration-200">About</a>
+          <a href="#" className="hover:text-white transition-colors duration-200">FAQ</a>
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="text-sm font-medium text-zinc-400 hover:text-white transition-colors">
+          <button className="text-sm font-medium text-zinc-400 hover:text-white transition-colors duration-200">
             Login
           </button>
         </div>
       </nav>
 
-      {/* --- HERO SECTION --- */}
       <main className="max-w-7xl mx-auto px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        {/* LEFT COLUMN */}
-        <div className="flex flex-col items-start lg:col-span-6">
+        <div className="flex flex-col items-start lg:col-span-6 animate-fade-in-up [animation-delay:150ms] [animation-fill-mode:both]">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-6">
             For modern digital businesses
           </p>
@@ -84,22 +81,21 @@ export default function LandingPage() {
           <div className="flex items-center gap-4">
             <button 
               onClick={() => navigate('/dashboard')}
-              className="text-xs font-bold bg-[#10B981] hover:bg-[#059669] text-white pl-3 pr-7 py-3 rounded-full transition-colors flex items-center gap-3 tracking-wider uppercase shadow-[0_4px_14px_rgba(16,185,129,0.25)]"
+              className="text-xs font-bold bg-[#10B981] hover:bg-[#059669] text-white pl-3 pr-7 py-3 rounded-full transition-all duration-300 scale-100 hover:scale-[1.03] active:scale-[0.98] flex items-center gap-3 tracking-wider uppercase shadow-[0_4px_14px_rgba(16,185,129,0.25)]"
             >
               <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-sm font-normal">→</span>
               Get Started
             </button>
-            <button className="text-xs font-bold tracking-wider uppercase text-[#10B981] border border-[#10B981]/20 hover:border-[#10B981]/40 bg-[#10B981]/5 px-7 py-3.5 rounded-full transition-colors">
+            <button className="text-xs font-bold tracking-wider uppercase text-[#10B981] border border-[#10B981]/20 hover:border-[#10B981]/40 bg-[#10B981]/5 px-7 py-3.5 rounded-full transition-colors duration-200">
               Book a Demo
             </button>
           </div>
 
-          {/* BRAND LOGOS */}
           <div className="mt-10 flex flex-col items-start gap-3">
             <p className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase select-none">
               Trusted By
             </p>
-            <div className="flex flex-wrap gap-8 items-center opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex flex-wrap gap-8 items-center opacity-30 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
               <div className="flex flex-row gap-1.5 items-center">
                 <img src={SolanaIcon} className="w-5 h-5" alt="Solana"/>
                 <span className="text-lg font-bold tracking-tighter hover:text-white transition-colors cursor-default">Solana</span>
@@ -113,12 +109,11 @@ export default function LandingPage() {
           </div>
         </div>
 
-        {/* RIGHT COLUMN */}
         <div 
           onClick={() => navigate('/dashboard')} 
-          className="w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-500 cursor-pointer"
+          className="w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-700 cursor-pointer animate-fade-in-up [animation-delay:300ms] [animation-fill-mode:both]"
         >
-          <div className="relative group rounded-xl border-4 border-zinc-800/80 bg-[#0B0B0C] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-zinc-700 aspect-[2934/1594]">
+          <div className="relative group rounded-xl border-4 border-zinc-800/80 bg-[#0B0B0C] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-zinc-700 hover:scale-[1.01] hover:shadow-[0_30px_70px_rgba(16,185,129,0.1)] aspect-[2934/1594]">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#10B981]/10 to-transparent opacity-30 blur-xl transition-all group-hover:opacity-40 pointer-events-none z-0" />
             <img src={Snippet} alt="Dashboard Preview" className="relative z-10 w-full h-full object-cover object-top" />
           </div>
@@ -126,7 +121,6 @@ export default function LandingPage() {
 
       </main>
 
-      {/* --- THE REVENUE NETWORK SECTION --- */}
       <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div className="lg:col-span-5">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-4">The Platform</p>
@@ -148,7 +142,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- FEATURES SECTION --- */}
       <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60">
         <div className="max-w-3xl mb-20">
           <p className="text-[#10B981] text-xs font-bold tracking-widest uppercase mb-4">Platform Capabilities</p>
@@ -159,25 +152,24 @@ export default function LandingPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Card 1 */}
-          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700">
-            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6">
+          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700 hover:-translate-y-1 hover:shadow-xl">
+            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
               <img className="w-6 h-6" src={GlobeIcon} alt="Global"/>
             </div>
             <h3 className="text-lg font-semibold text-white mb-3">Global Incorporation</h3>
             <p className="text-sm text-zinc-400 leading-relaxed">Form your legal entity seamlessly from anywhere in the world. Tailored explicitly for borderless founders operating remote-first frameworks.</p>
           </div>
-          {/* Card 2 */}
-          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700">
-            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6">
+          
+          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700 hover:-translate-y-1 hover:shadow-xl">
+            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
               <img className="w-6 h-6" src={AnalyticIcon} alt="Analytics"/>
             </div>
             <h3 className="text-lg font-semibold text-white mb-3">Real-time Financial Analytics</h3>
             <p className="text-sm text-zinc-400 leading-relaxed">Track multi-currency revenue streams instantly. Monitor incoming orders, cancellations, and net profit velocity directly through live tracking cards.</p>
           </div>
-          {/* Card 3 */}
-          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700">
-            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6">
+
+          <div className="group rounded-xl border border-zinc-800/60 bg-[#131315] p-8 transition-all duration-300 hover:border-zinc-700 hover:-translate-y-1 hover:shadow-xl">
+            <div className="w-10 h-10 rounded-lg bg-[#10B981]/10 border border-[#10B981]/20 flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
               <img className="w-6 h-6" src={ShieldIcon} alt="Compliance"/>
             </div>
             <h3 className="text-lg font-semibold text-white mb-3">Automated Compliance</h3>
@@ -186,7 +178,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- ABOUT SECTION --- */}
       <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60">
         <div className="max-w-4xl mb-20">
           <p className="text-[#10B981] text-xs font-bold tracking-widest uppercase mb-4">About revnet</p>
@@ -217,7 +208,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- FAQ SECTION --- */}
       <section className="max-w-7xl mx-auto px-8 py-24 border-t border-zinc-900/60 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
         <div className="lg:col-span-5">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-4">FAQ</p>
@@ -230,7 +220,7 @@ export default function LandingPage() {
             return (
               <div key={index} onClick={() => toggleFaq(index)} className="border-b border-zinc-800/80 py-6 cursor-pointer group flex flex-col justify-center">
                 <div className="flex items-center justify-between gap-4">
-                  <span className="text-base font-medium text-[#E5E5E5] group-hover:text-white transition-colors">{item.question}</span>
+                  <span className="text-base font-medium text-[#E5E5E5] group-hover:text-white transition-colors duration-200">{item.question}</span>
                   <span className={`text-xl font-light text-zinc-500 group-hover:text-[#10B981] transition-transform duration-300 ease-in-out select-none ${isOpen ? "rotate-45 text-[#10B981]" : ""}`}>+</span>
                 </div>
                 <div className={`grid transition-all duration-300 ease-in-out text-sm text-zinc-400 ${isOpen ? "grid-rows-[1fr] mt-4 opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
@@ -242,11 +232,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- FOOTER SECTION --- */}
       <footer className="max-w-7xl mx-auto px-8 pt-24 pb-12 border-t border-zinc-900 mt-12 text-sm text-zinc-400">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start pb-16">
           
-          {/* Brand */}
           <div className="md:col-span-6 flex flex-col items-start gap-4">
             <div className="flex items-center gap-2">
               <img src={RevLogo} className="w-6 h-6 rounded-sm mt-0.5" alt="revnet logo" />
@@ -260,42 +248,35 @@ export default function LandingPage() {
             </p>
           </div>
 
-          {/* Navigation Link Columns */}
           <div className="md:col-span-3 flex flex-col gap-4">
             <span className="text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">Navigation</span>
             <div className="flex flex-col gap-3 text-xs">
-              <a href="#" className="hover:text-white transition-colors">Features</a>
-              <a href="#" className="hover:text-white transition-colors">How It Works</a>
-              <a href="#" className="hover:text-white transition-colors">Pricing</a>
-              <a href="#" className="hover:text-white transition-colors">FAQ</a>
-              <a href="#" className="hover:text-white transition-colors">Blog</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">Features</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">How It Works</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">Pricing</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">FAQ</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">Blog</a>
             </div>
           </div>
 
-          {/* Legal Information & Social Links */}
           <div className="md:col-span-3 flex flex-col gap-4">
             <span className="text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">Legal</span>
             <div className="flex flex-col gap-3 text-xs mb-2">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">Privacy Policy</a>
+              <a href="#" className="hover:text-white transition-colors duration-200">Terms of Service</a>
             </div>
             
-            {/* Social Icons */}
             <div className="flex items-center gap-4 text-zinc-500 pt-2">
-              {/* X */}
-              <a href="#" className="hover:text-white transition-colors" aria-label="X">
+              <a href="#" className="hover:text-white transition-colors duration-200" aria-label="X">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
-              {/* Instagram (TypeScript friendly height parameter mapped) */}
-              <a href="#" className="hover:text-white transition-colors" aria-label="Instagram">
+              <a href="#" className="hover:text-white transition-colors duration-200" aria-label="Instagram">
                 <svg className="w-4 h-4 stroke-current fill-none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
               </a>
-              {/* Telegram */}
-              <a href="#" className="hover:text-white transition-colors" aria-label="Telegram">
+              <a href="#" className="hover:text-white transition-colors duration-200" aria-label="Telegram">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M21.418 4.938L19 20.03c-.24 1.5-1.2.18-1.2.18l-5.65-4.18-2.73 2.63c-.3.3-.55.55-1.05.55l.4-5.63 10.26-9.28c.45-.4-.1-.63-.7-.23L5.66 14.15l-5.46-1.7c-1.18-.38-1.21-1.18.25-1.75l21.31-8.22c.98-.38 1.84.22 1.66 1.6z"/></svg>
               </a>
-              {/* Discord */}
-              <a href="#" className="hover:text-white transition-colors" aria-label="Discord">
+              <a href="#" className="hover:text-white transition-colors duration-200" aria-label="Discord">
                 <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.094 13.094 0 0 1-1.873-.894.077.077 0 0 1-.008-.128c.126-.093.252-.19.372-.287a.075.075 0 0 1 .077-.011c3.92 1.793 8.18 1.793 12.061 0a.073.075 0 0 1 .078.009c.12.099.246.195.373.289a.077.077 0 0 1-.006.127 12.298 12.298 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 h-1.333-.956 2.418-2.156 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.156-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.156 2.418z"/></svg>
               </a>
             </div>
@@ -303,7 +284,6 @@ export default function LandingPage() {
 
         </div>
 
-        {/* Bottom Bar */}
         <div className="pt-8 border-t border-zinc-900 flex items-center justify-between text-xs text-zinc-600">
           <p>© 2026 revnet. All rights reserved.</p>
         </div>
