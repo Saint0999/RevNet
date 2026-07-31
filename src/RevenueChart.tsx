@@ -1,14 +1,17 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import type { RevenueDatum } from './types.ts';
 
 interface RevenueChartProps {
-  data: any[];
+  data: RevenueDatum[];
 }
 
 function RevenueChart({ data }: RevenueChartProps) {
-  
-  const isPositive = data.length > 1 ? data[data.length - 1].revenue >= data[0].revenue : true;
-  
-  const chartColor = isPositive ? "#34d399" : "#ef4444"; 
+
+  const first = data.at(0);
+  const last = data.at(-1);
+  const isPositive = first && last ? last.revenue >= first.revenue : true;
+
+  const chartColor = isPositive ? "#34d399" : "#ef4444";
 
   return (
     <div className="bg-[#13171c] border border-gray-800 rounded-xl p-6 w-full h-full min-h-[300px] flex flex-col font-sans">
@@ -46,18 +49,21 @@ function RevenueChart({ data }: RevenueChartProps) {
               fontSize={12} 
               tickLine={false} 
               axisLine={false} 
-              tickFormatter={(value) => `$${value >= 1000 ? value / 1000 + 'k' : value}`} 
+              tickFormatter={(value: number) => `$${value >= 1000 ? value / 1000 + 'k' : value}`}
             />
             
             <Tooltip
-              contentStyle={{ 
-                backgroundColor: '#181d24', 
-                borderColor: '#262d36', 
+              contentStyle={{
+                backgroundColor: '#181d24',
+                borderColor: '#262d36',
                 borderRadius: '8px',
                 color: '#f3f4f6'
               }}
               itemStyle={{ color: chartColor }}
-              formatter={(value: any) => [`$${value.toLocaleString('en-US')}`, 'Revenue']}
+              formatter={(value) => [
+                typeof value === 'number' ? `$${value.toLocaleString('en-US')}` : String(value ?? ''),
+                'Revenue',
+              ]}
             />
             
             <Area 

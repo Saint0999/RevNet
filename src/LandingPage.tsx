@@ -147,15 +147,24 @@ export default function LandingPage() {
           </div>
         </div>
 
-        <div 
-          onClick={() => navigate('/dashboard')} 
-          className="w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-700 cursor-pointer"
+        <button
+          type="button"
+          onClick={() => navigate('/dashboard')}
+          aria-label="Open the revnet dashboard"
+          className="block w-full lg:col-span-6 lg:pl-4 saturate-0 hover:saturate-100 transition-all ease-in-out duration-700 cursor-pointer"
         >
-          <div className="relative group rounded-xl border-4 border-zinc-800/80 bg-[#0B0B0C] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-zinc-700 hover:scale-[1.01] hover:shadow-[0_30px_70px_rgba(16,185,129,0.1)] aspect-[2934/1594]">
+          <div className="relative group rounded-xl border-4 border-zinc-800/80 bg-[#0B0B0C] overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.7)] transition-all duration-500 hover:border-zinc-700 hover:scale-[1.01] hover:shadow-[0_30px_70px_rgba(16,185,129,0.1)] aspect-[1400/760]">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#10B981]/10 to-transparent opacity-30 blur-xl transition-all group-hover:opacity-40 pointer-events-none z-0" />
-            <img src={Snippet} alt="Dashboard Preview" className="relative z-10 w-full h-full object-cover object-top" />
+            <img
+              src={Snippet}
+              alt="Preview of the revnet dashboard showing revenue stats and a chart"
+              width={1400}
+              height={760}
+              fetchPriority="high"
+              className="relative z-10 w-full h-full object-cover object-top"
+            />
           </div>
-        </div>
+        </button>
 
       </main>
 
@@ -276,13 +285,29 @@ export default function LandingPage() {
           {faqItems.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <div key={index} onClick={() => toggleFaq(index)} className="border-b border-zinc-800/80 py-6 cursor-pointer group flex flex-col justify-center">
-                <div className="flex items-center justify-between gap-4">
-                  <span className="text-base font-medium text-[#E5E5E5] group-hover:text-white transition-colors duration-200">{item.question}</span>
-                  <span className={`text-xl font-light text-zinc-500 group-hover:text-[#10B981] transition-transform duration-300 ease-in-out select-none ${isOpen ? "rotate-45 text-[#10B981]" : ""}`}>+</span>
-                </div>
-                <div className={`grid transition-all duration-300 ease-in-out text-sm text-zinc-400 ${isOpen ? "grid-rows-[1fr] mt-4 opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                  <div className="overflow-hidden leading-relaxed max-w-2xl">{item.answer}</div>
+              <div key={item.question} className="border-b border-zinc-800/80">
+                <h3>
+                  <button
+                    type="button"
+                    id={`faq-trigger-${index}`}
+                    onClick={() => toggleFaq(index)}
+                    aria-expanded={isOpen}
+                    aria-controls={`faq-panel-${index}`}
+                    className="group flex w-full items-center justify-between gap-4 py-6 text-left cursor-pointer"
+                  >
+                    <span className="text-base font-medium text-[#E5E5E5] group-hover:text-white transition-colors duration-200">{item.question}</span>
+                    <span aria-hidden="true" className={`text-xl font-light text-zinc-500 group-hover:text-[#10B981] transition-transform duration-300 ease-in-out select-none ${isOpen ? "rotate-45 text-[#10B981]" : ""}`}>+</span>
+                  </button>
+                </h3>
+                <div
+                  id={`faq-panel-${index}`}
+                  role="region"
+                  aria-labelledby={`faq-trigger-${index}`}
+                  className={`grid transition-all duration-300 ease-in-out text-sm text-zinc-400 ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
+                >
+                  <div className="overflow-hidden leading-relaxed max-w-2xl">
+                    <p className="pb-6">{item.answer}</p>
+                  </div>
                 </div>
               </div>
             );

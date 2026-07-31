@@ -6,9 +6,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "./components/ui/table"; 
+} from "./components/ui/table";
+import type { Order, OrderStatus } from "./types.ts";
 
-const orders = [
+const orders: Order[] = [
   { id: "ORD-8502", customer: "Liam Gallagher", status: "Confirmed", date: "Today, 10:42 AM", amount: "$120.00" },
   { id: "ORD-8501", customer: "Emma Watson", status: "Confirmed", date: "Today, 09:15 AM", amount: "$890.00" },
   { id: "ORD-8500", customer: "James Chen", status: "Pending", date: "Today, 08:30 AM", amount: "$340.50" },
@@ -63,9 +64,9 @@ const orders = [
 
 export default function RecentOrders() {
   
-  const [activeFilter, setActiveFilter] = useState("All");
+  const [activeFilter, setActiveFilter] = useState<OrderStatus | "All">("All");
 
-  const filters = ["All", "Confirmed", "Pending", "Cancelled", "Refunded"];
+  const filters: Array<OrderStatus | "All"> = ["All", "Confirmed", "Pending", "Cancelled", "Refunded"];
 
   const filteredOrders = activeFilter === "All" 
     ? orders 

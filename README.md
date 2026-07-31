@@ -1,73 +1,77 @@
-# React + TypeScript + Vite
+# revnet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A front-end concept for a global incorporation and accounting platform — a marketing landing page plus an interactive revenue dashboard.
 
-Currently, two official plugins are available:
+Built as a learning project to practise TypeScript and Tailwind CSS.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> All data in this project is hard-coded mock data. There is no backend, no auth, and no persistence.
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Concern | Choice |
+| --- | --- |
+| Build | Vite |
+| UI | React 19 + TypeScript (strict) |
+| Styling | Tailwind CSS v4 (CSS-first `@theme` config) |
+| Components | shadcn / Radix primitives (`avatar`, `table`) |
+| Charts | Recharts |
+| Routing | React Router |
+| Font | Geist Variable (self-hosted via Fontsource) |
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+The dev server prints a local URL (default `http://localhost:5173`).
+
+## Scripts
+
+| Script | Does |
+| --- | --- |
+| `npm run dev` | Start the Vite dev server with HMR |
+| `npm run build` | Typecheck, then build to `dist/` |
+| `npm run typecheck` | Typecheck only |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Serve the production build locally |
+
+## Routes
+
+| Path | Screen |
+| --- | --- |
+| `/` | Landing page — hero, platform overview, features, about, FAQ |
+| `/dashboard` | Dashboard — stat cards, revenue chart, activity ticker, orders table |
+
+## Project layout
+
+```
+src/
+  App.tsx            Router setup
+  LandingPage.tsx    Marketing page
+  Dashboard.tsx      Dashboard shell + mock datasets
+  Sidebar.tsx        Collapsible nav rail
+  StatCard.tsx       Revenue / profit / orders / cancelled tile
+  RevenueChart.tsx   Recharts area chart
+  ActivityTicker.tsx Looping order marquee
+  RecentOrders.tsx   Filterable orders table
+  types.ts           Shared domain types
+  components/ui/     shadcn primitives
+  lib/utils.ts       `cn()` class merge helper
+```
+
+## Theming
+
+Colour tokens live in `src/index.css` as CSS custom properties, following the shadcn convention. The app is dark-only: `<html>` carries a permanent `dark` class in `index.html`, which is what makes the `--background` / `--border` / `--muted` tokens resolve to their dark values.
+
+## Known gaps
+
+These are deliberate — the project is a UI exercise, not a product.
+
+- Sidebar nav items are not wired to routes; only `/` and `/dashboard` exist.
+- The landing page's **Login** button and its in-page anchors (`Features`, `Pricing`, `FAQ`, footer links) are placeholders.
+- Dashboard figures are static per timeframe rather than fetched.
