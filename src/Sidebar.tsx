@@ -16,11 +16,11 @@ interface SidebarProps {
     setIsOpen: (isOpen: boolean) => void;
 }
 
-export function AvatarWithBadge() {
+function AvatarWithBadge() {
   return (
     <Avatar className="h-8.5 w-8.5">
-      <AvatarImage src={spongebob} alt="@shadcn" />
-      <AvatarFallback>CN</AvatarFallback>
+      <AvatarImage src={spongebob} alt="saint_999" />
+      <AvatarFallback>S9</AvatarFallback>
       <AvatarBadge className="bg-green-600 dark:bg-green-800" />
     </Avatar>
   )
@@ -55,15 +55,23 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                             <p className="text-white font-thin opacity-75 tracking-tight whitespace-nowrap text-2xl">net</p>
                         </div>
                         
-                        <div className={`flex items-center justify-center flex-shrink-0 px-1`}>
-                            <img 
-                                onClick={() => setIsOpen(!isOpen)} 
-                                src={lessIcon} 
-                                alt="Toggle Menu" 
-                                className={`w-8 h-8 rounded-full hover:bg-[#435166]/50 transition-transform transition-opacity duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] ${
-                                    isOpen ? 'rotate-0' : 'rotate-180'
-                                }`}
-                            />
+                        <div className="flex items-center justify-center flex-shrink-0 px-1">
+                            <button
+                                type="button"
+                                onClick={() => setIsOpen(!isOpen)}
+                                aria-label={isOpen ? 'Collapse sidebar' : 'Expand sidebar'}
+                                aria-expanded={isOpen}
+                                className="rounded-full hover:bg-[#435166]/50 transition-colors duration-300 cursor-pointer"
+                            >
+                                <img
+                                    src={lessIcon}
+                                    alt=""
+                                    aria-hidden="true"
+                                    className={`w-8 h-8 transition-transform duration-300 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+                                        isOpen ? 'rotate-0' : 'rotate-180'
+                                    }`}
+                                />
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -140,9 +148,13 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                     </div>
                 </div>
 
-                <button className="w-full flex items-center -mt-1 py-2 px-[10px] rounded-full opacity-80 hover:opacity-100 transition-all duration-300 ease-in-out bg-red-500/25">
+                <button
+                    type="button"
+                    aria-label="Log out"
+                    className="w-full flex items-center -mt-1 py-2 px-[10px] rounded-full opacity-80 hover:opacity-100 transition-all duration-300 ease-in-out bg-red-500/25 cursor-pointer"
+                >
                     <div className="w-5 h-5 flex items-center justify-center flex-shrink-0 ml-0.5">
-                        <img src={logoutIcon} alt="Logout" className="w-full h-full object-contain" />
+                        <img src={logoutIcon} alt="" aria-hidden="true" className="w-full h-full object-contain" />
                     </div>
                     <span 
                         className={`text-red-400 whitespace-nowrap overflow-hidden transition-all duration-300 ease-in-out ${
@@ -154,12 +166,15 @@ function Sidebar({isOpen, setIsOpen}: SidebarProps){
                 </button>
             </aside>
 
-            <div 
-                onClick={() => setIsOpen(true)} 
+            <button
+                type="button"
+                onClick={() => setIsOpen(true)}
+                aria-label="Open navigation menu"
+                aria-expanded={isOpen}
                 className="absolute top-4 left-4 z-40 flex md:hidden items-center justify-center w-10 h-10 rounded-full bg-[#13171c] border border-gray-800/60 hover:bg-[#435166]/50 transition-colors duration-200 cursor-pointer"
             >
-                <img src={MenuIcon} alt="Open Menu" className="w-6 h-6" />
-            </div>
+                <img src={MenuIcon} alt="" aria-hidden="true" className="w-6 h-6" />
+            </button>
         </>
     )
 }

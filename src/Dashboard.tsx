@@ -1,12 +1,12 @@
 import Sidebar from './Sidebar.tsx'
-import Cards from './Cards.tsx'
-import Cards2 from './Cards2.tsx'
+import StatCard from './StatCard.tsx'
 import RevenueChart from './RevenueChart.tsx'
 import ActivityTicker from './ActivityTicker.tsx'
 import RecentOrders from './RecentOrders.tsx'
 import {useState} from 'react'
+import type { RevenueDatum, Timeframe, TimeframeStats } from './types.ts'
 
-const dashboardData: Record<string, any> = {
+const dashboardData: Record<Timeframe, TimeframeStats> = {
   '7 Days': {
     revenue: 13750,
     revenuePercentage: 3.2,
@@ -49,7 +49,7 @@ const dashboardData: Record<string, any> = {
   }
 };
 
-const chartData: Record<string, any[]> = {
+const chartData: Record<Timeframe, RevenueDatum[]> = {
   '7 Days': [
     { name: 'Mon', revenue: 1450 }, 
     { name: 'Tue', revenue: 1200 }, 
@@ -91,9 +91,9 @@ const chartData: Record<string, any[]> = {
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [activeButton, setActiveButton] = useState('7 Days');
+  const [activeButton, setActiveButton] = useState<Timeframe>('7 Days');
 
-  const timeframes = ['7 Days', '30 Days', '90 Days', '12 Months'];
+  const timeframes: Timeframe[] = ['7 Days', '30 Days', '90 Days', '12 Months'];
   const currentData = dashboardData[activeButton];
 
   const currentChartData = chartData[activeButton];
@@ -145,13 +145,13 @@ function App() {
             <div className="flex flex-col gap-4 h-full justify-between">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Cards title="Revenue" revenue={currentData.revenue} percentage={currentData.revenuePercentage}/>
-                <Cards title="Net Profit" revenue={currentData.profit} percentage={currentData.profitPercentage}/>
+                <StatCard title="Revenue" value={currentData.revenue} percentage={currentData.revenuePercentage} format="currency"/>
+                <StatCard title="Net Profit" value={currentData.profit} percentage={currentData.profitPercentage} format="currency"/>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <Cards2 title="Orders" orders={currentData.orders} percentage={currentData.ordersPercentage}/>
-                <Cards2 title="Cancelled" orders={currentData.cancelled} percentage={currentData.cancelledPercentage}/>
+                <StatCard title="Orders" value={currentData.orders} percentage={currentData.ordersPercentage}/>
+                <StatCard title="Cancelled" value={currentData.cancelled} percentage={currentData.cancelledPercentage}/>
               </div>
 
               <div className="mt-auto">
