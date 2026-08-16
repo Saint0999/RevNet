@@ -13,6 +13,11 @@ function RevenueChart({ data }: RevenueChartProps) {
 
   const chartColor = isPositive ? "#34d399" : "#ef4444";
 
+  // Match the stat cards' settle tempo instead of Recharts' default 1500ms,
+  // and skip the redraw animation entirely under reduced motion.
+  const prefersReducedMotion =
+    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   return (
     <div className="bg-[#13171c] border border-gray-800 rounded-xl p-6 w-full h-full min-h-[300px] flex flex-col font-sans">
       
@@ -66,13 +71,16 @@ function RevenueChart({ data }: RevenueChartProps) {
               ]}
             />
             
-            <Area 
-              type="monotone" 
-              dataKey="revenue" 
-              stroke={chartColor} 
-              strokeWidth={3} 
-              fillOpacity={1} 
-              fill="url(#colorRevenue)" 
+            <Area
+              type="monotone"
+              dataKey="revenue"
+              stroke={chartColor}
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorRevenue)"
+              isAnimationActive={!prefersReducedMotion}
+              animationDuration={400}
+              animationEasing="ease-out"
             />
           </AreaChart>
         </ResponsiveContainer>

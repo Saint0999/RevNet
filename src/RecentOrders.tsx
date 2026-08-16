@@ -117,7 +117,9 @@ export default function RecentOrders() {
       {/* Table Section */}
       <div className="bg-[#13171c] border border-gray-800 rounded-xl overflow-hidden">
         
-        <div className="[&>div]:max-h-[500px]">
+        {/* Keyed on the active filter: the filtered set settles into place
+            as one block instead of snapping, matching the stat cards. */}
+        <div key={activeFilter} className="[&>div]:max-h-[500px] animate-table-settle">
           <Table>
             
             <TableHeader className="sticky top-0 z-20 bg-[#13171c]">

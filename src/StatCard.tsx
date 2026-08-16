@@ -17,18 +17,23 @@ function StatCard({ title, value, percentage, format = "number" }: StatCardProps
         {title}
       </h3>
 
-      <p className="text-white text-4xl font-semibold mb-4">
-        {format === "currency" ? `$${formattedValue}` : formattedValue}
-      </p>
+      {/* Keyed on the figures themselves: a new timeframe settles into place
+          instead of snapping, echoing how revnet reads live rather than in
+          a monthly close. */}
+      <div key={`${value}-${percentage}`} className="animate-stat-settle">
+        <p className="text-white text-4xl font-semibold mb-4">
+          {format === "currency" ? `$${formattedValue}` : formattedValue}
+        </p>
 
-      <div className="flex justify-between items-end">
-        <span
-          className={`text-sm font-medium ${
-            isPositive ? 'text-emerald-400' : 'text-red-500'
-          }`}
-        >
-          {isPositive ? '+ ' : '- '}{Math.abs(percentage)}%
-        </span>
+        <div className="flex justify-between items-end">
+          <span
+            className={`text-sm font-medium ${
+              isPositive ? 'text-emerald-400' : 'text-red-500'
+            }`}
+          >
+            {isPositive ? '+ ' : '- '}{Math.abs(percentage)}%
+          </span>
+        </div>
       </div>
     </div>
   );

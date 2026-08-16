@@ -77,11 +77,10 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      <main 
+      <main
         ref={heroRef}
-        className={`max-w-7xl mx-auto px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center transition-all duration-1000 ease-out ${
-          heroRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}
+        data-revealed={heroRevealed}
+        className="hero-settle max-w-7xl mx-auto px-8 pt-8 pb-16 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
       >
         <div className="flex flex-col items-start lg:col-span-6">
           <p className="text-zinc-500 text-xs font-semibold tracking-widest uppercase mb-6">
