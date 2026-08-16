@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import RevLogo from "./assets/revlogo1.png"
 import Snippet from "./assets/revsnip.png"
 import AnalyticIcon from "./assets/analytics.png"
@@ -6,38 +6,15 @@ import GlobeIcon from "./assets/globe.png"
 import ShieldIcon from "./assets/shield.png"
 import SolanaIcon from "./assets/solana.png"
 import CircleIcon from "./assets/circle.png"
-import { useNavigate } from "react-router-dom";
-
-function useScrollReveal() {
-  const [isRevealed, setIsRevealed] = useState(false);
-  const elementRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsRevealed(true);
-          observer.unobserve(entry.target);
-        }
-      },
-      {
-        rootMargin: "-100px 0px",
-        threshold: 0.1,
-      }
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return [elementRef, isRevealed] as const;
-}
+import { useNavigate, Link } from "react-router-dom";
+import { useScrollReveal } from "./useScrollReveal";
+import { useSmoothScroll } from "./useSmoothScroll";
 
 export default function LandingPage() {
   const navigate = useNavigate();
+
+  useSmoothScroll();
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const [heroRef, heroRevealed] = useScrollReveal();
@@ -90,6 +67,7 @@ export default function LandingPage() {
           <a href="#" className="hover:text-white transition-colors duration-200">How It Works</a>
           <a href="#" className="hover:text-white transition-colors duration-200">About</a>
           <a href="#" className="hover:text-white transition-colors duration-200">FAQ</a>
+          <Link to="/product" className="text-[#10B981] hover:text-[#34D399] transition-colors duration-200">Product</Link>
         </div>
 
         <div className="flex items-center gap-6">
@@ -339,6 +317,7 @@ export default function LandingPage() {
               <a href="#" className="hover:text-white transition-colors duration-200">Pricing</a>
               <a href="#" className="hover:text-white transition-colors duration-200">FAQ</a>
               <a href="#" className="hover:text-white transition-colors duration-200">Blog</a>
+              <Link to="/product" className="hover:text-white transition-colors duration-200">Product</Link>
             </div>
           </div>
 

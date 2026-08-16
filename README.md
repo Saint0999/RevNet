@@ -15,6 +15,7 @@ Built as a learning project to practise TypeScript and Tailwind CSS.
 | Styling | Tailwind CSS v4 (CSS-first `@theme` config) |
 | Components | shadcn / Radix primitives (`avatar`, `table`) |
 | Charts | Recharts |
+| Smooth scroll | Lenis (marketing pages only) |
 | Routing | React Router |
 | Font | Geist Variable (self-hosted via Fontsource) |
 
@@ -45,6 +46,7 @@ The dev server prints a local URL (default `http://localhost:5173`).
 | Path | Screen |
 | --- | --- |
 | `/` | Landing page — hero, platform overview, features, about, FAQ |
+| `/product` | Product page — what revenue tracking with revnet does, how it works, features, FAQ |
 | `/dashboard` | Dashboard — stat cards, revenue chart, activity ticker, orders table |
 
 ## Project layout
@@ -53,12 +55,15 @@ The dev server prints a local URL (default `http://localhost:5173`).
 src/
   App.tsx            Router setup
   LandingPage.tsx    Marketing page
+  ProductPage.tsx    Product page explaining the revenue tracking product
   Dashboard.tsx      Dashboard shell + mock datasets
   Sidebar.tsx        Collapsible nav rail
   StatCard.tsx       Revenue / profit / orders / cancelled tile
   RevenueChart.tsx   Recharts area chart
   ActivityTicker.tsx Looping order marquee
   RecentOrders.tsx   Filterable orders table
+  useScrollReveal.ts Reveal-on-scroll hook shared by the marketing pages
+  useSmoothScroll.ts Lenis smooth scrolling + eased in-page anchor jumps
   types.ts           Shared domain types
   components/ui/     shadcn primitives
   lib/utils.ts       `cn()` class merge helper
@@ -72,6 +77,6 @@ Colour tokens live in `src/index.css` as CSS custom properties, following the sh
 
 These are deliberate — the project is a UI exercise, not a product.
 
-- Sidebar nav items are not wired to routes; only `/` and `/dashboard` exist.
+- Sidebar nav items are not wired to routes; only `/`, `/product`, and `/dashboard` exist.
 - The landing page's **Login** button and its in-page anchors (`Features`, `Pricing`, `FAQ`, footer links) are placeholders.
 - Dashboard figures are static per timeframe rather than fetched.
